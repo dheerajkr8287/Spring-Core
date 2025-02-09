@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   <bean id="petrolEngine" class="org.example.PetrolEngine"> </bean>
+    <bean id="de" class="org.example.DeiselEngine"> </bean>
+
+    <!--  id mai kuch bhi de sakte h -->
+    <bean id="car" class="org.example.Car">
+<!--        yaha par name dege jis par class depend hoga uska name write karna hai-->
+<!--        property tells us which dependendicies is used -->
+        <property name="engine" ref="de"/>
+        
+    </bean>
+
+</beans>

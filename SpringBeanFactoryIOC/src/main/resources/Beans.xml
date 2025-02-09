@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--    <bean id="petrol" class="org.example.PetrolEngine"></bean>-->
+<!--    <bean id="diesel" class="org.example.DieselEngine"></bean>-->
+
+<!--    for auto wiring-->
+        <bean id="engine" class="org.example.PetrolEngine"></bean>
+
+<!--scope =protoype is used because for every getbean() we create different different object for them  -->
+    <bean id="carObject" class="org.example.Car" scope="prototype" autowire="byName">
+<!--        <property name="engine" ref="petrol" />  &lt;!&ndash; Setter DI &ndash;&gt;-->
+<!--        <constructor-arg  ref="diesel" />  &lt;!&ndash; Constructor DI &ndash;&gt;-->
+
+    </bean>
+
+</beans>
+
+
+<!-- Why is the Car(Engine engine) Constructor Called Instead of the Default Constructor?
+When Spring creates a bean, it first checks if a constructor injection (constructor-arg) is defined in the configuration.
+If yes, it calls the parameterized constructor instead of the default constructor.-->
+
+
+
+<!--2. Why Constructor DI is Processed Before Setter DI?
+Spring follows these steps when creating a bean:
+
+Step 1: Object Instantiation (Constructor DI is Processed First)
+Spring first checks if the bean has constructor arguments (<constructor-arg>).
+
+If found, Spring calls the corresponding constructor and injects dependencies.
+
+In your case, Spring finds <constructor-arg ref="diesel" />, so it calls Car(Engine engine) and passes DieselEngine.
+
+At this point, this.engine = diesel; inside the constructor.
+
+Step 2: Property Injection (Setter DI is Processed After Constructor DI)
+After instantiating the object, Spring checks for <property> elements.
+
+Since <property name="engine" ref="petrol" /> is defined, Spring calls setEngine() and replaces DieselEngine with PetrolEngine.
+
+That’s why setter DI overrides constructor DI.
+
+Final assigned engine: PetrolEngine-->
+
+
+
+
+<!--4. What Happens if We Swap the Order of <property> and <constructor-arg> in Beans.xml?
+Even if you write:
+
+
+<bean id="carObject" class="org.example.Car">
+    <property name="engine" ref="petrol" />     Setter DI
+     <constructor-arg ref="diesel" />          Constructor DI
+        </bean>
+        The order in Beans.xml does NOT matter because Spring always executes Constructor DI first before Setter DI.
+        Setter DI will still override Constructor DI in the end.
+        Conclusion
+        Spring always prioritizes Constructor DI first.
+        If <constructor-arg> exists, Spring calls that constructor instead of the default constructor.
+After Constructor DI, Setter DI is applied and overrides the constructor-injected values.
+Order in Beans.xml doesn’t matter—Spring always processes Constructor DI before Setter DI.-->

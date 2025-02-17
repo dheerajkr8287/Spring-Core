@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--    <bean id="petrol" class="org.example.PetrolEngine"></bean>-->
+<!--    <bean id="diesel" class="org.example.DieselEngine"></bean>-->
+
+<!--    for auto wiring-->
+
+    <bean id="engine" class="org.example.PetrolEngine" autowire-candidate="true"></bean>
+    <bean id="Diesel" class="org.example.DieselEngine" autowire-candidate="false"></bean>
+
+<!--scope =protoype is used because for every getbean() we create different different object for them  -->
+<!--    Autowiring by Name:-->
+<!--    <bean id="carObject" class="org.example.Car" scope="prototype" autowire="byName">-->
+<!--    </bean>-->
+
+<!--       AutoWiring by Type-->
+<!--    <bean id="carObject" class="org.example.Car" scope="prototype" autowire="byType">-->
+<!--    </bean>-->
+
+
+<!--     Autowiring by constructor for running constructor DI-->
+
+<!--    <bean id="carObject" class="org.example.Car" scope="prototype" autowire="constructor">-->
+<!--    </bean>-->
+
+
+<!--    Autowiring with no arguments-->
+    <bean id="carObject" class="org.example.Car" scope="prototype" autowire="no">
+    </bean>
+
+
+
+
+
+
+</beans>
+
+

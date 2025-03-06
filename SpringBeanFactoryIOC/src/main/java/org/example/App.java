@@ -18,9 +18,9 @@ public class App
 
         ApplicationContext applicationContext=new ClassPathXmlApplicationContext("Beans.xml");
 
-        Car car1 = applicationContext.getBean(Car.class);
-//        Car car2=applicationContext.getBean(Car.class);
-        car1.driver();
+//        Car car1 = applicationContext.getBean(Car.class);
+////        Car car2=applicationContext.getBean(Car.class);
+//        car1.driver();
 
 //        System.out.println(car1.hashCode());
 //        System.out.println(car2.hashCode());

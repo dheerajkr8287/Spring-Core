@@ -12,7 +12,7 @@
 
 
     <!--scope =protoype is used because for every getbean() we create different different object for them  -->
-    <bean id="carObject" class="org.example.Car" scope="prototype" autowire="byName">
+    <bean id="carObject" class="org.example.Car"  scope="prototype" autowire="byName">
 <!--        <property name="engine" ref="petrol" />  &lt;!&ndash; Setter DI &ndash;&gt;-->
 <!--        <constructor-arg  ref="diesel" />  &lt;!&ndash; Constructor DI &ndash;&gt;-->
 
